@@ -3,13 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation.xml"
-    app:startDestination="@id/onBoardFragment">
+    app:startDestination="@id/noteFragment">
 
     <fragment
         android:id="@+id/noteFragment"
         android:name="com.example.curandmon4homwor2.ui.fragment.note.NoteFragment"
         android:label="fragment_note"
-        tools:layout="@layout/fragment_note" />
+        tools:layout="@layout/fragment_note" >
+        <action
+            android:id="@+id/action_noteFragment_to_noteDetailFragment"
+            app:destination="@id/noteDetailFragment"
+            app:enterAnim="@anim/slid_in_right"
+            app:exitAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_rigth"
+            />
+    </fragment>
     <fragment
         android:id="@+id/onBoardFragment"
         android:name="com.example.curandmon4homwor2.ui.fragment.omBoard.OnBoardFragment"
@@ -24,4 +32,9 @@
         android:name="com.example.curandmon4homwor2.ui.fragment.omBoard.OnBoardPagingFragment"
         android:label="fragment_on_board_paging"
         tools:layout="@layout/fragment_on_board_paging" />
+    <fragment
+        android:id="@+id/noteDetailFragment"
+        android:name="com.example.curandmon4homwor2.ui.fragment.NoteDetailFragment"
+        android:label="fragment_note_detail"
+        tools:layout="@layout/fragment_note_detail" />
 </navigation>
