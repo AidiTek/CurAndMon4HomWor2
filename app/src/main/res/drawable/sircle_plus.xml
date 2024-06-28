@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Желтая окружность -->
+    <item android:width="70dp" android:height="70dp">
+        <shape
+            android:shape="oval">
+            <solid android:color="#D88B02" /> <!-- Желтый цвет -->
+        </shape>
+    </item>
+
+    <!-- Белый плюсик внутри окружности -->
+    <item android:width="70dp" android:height="70dp"
+        android:drawable="@drawable/plus"
+        android:gravity="center" />
+
+</layer-list>

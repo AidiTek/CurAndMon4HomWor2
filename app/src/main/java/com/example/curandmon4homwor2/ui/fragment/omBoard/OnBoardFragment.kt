@@ -1,5 +1,6 @@
 package com.example.curandmon4homwor2.ui.fragment.omBoard
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.curandmon4homwor2.R
 import com.example.curandmon4homwor2.databinding.FragmentOnBoardBinding
 import com.example.curandmon4homwor2.ui.adapter.OnBoardViewPagerAdapter
+import com.example.curandmon4homwor2.utills.SheredPreference
 import com.google.android.material.tabs.TabLayoutMediator
 
 
@@ -77,6 +79,8 @@ class OnBoardFragment : Fragment() {
                 } else {
                     binding.tvStart.visibility = View.INVISIBLE
                     binding.tvStart.setOnClickListener {
+                        val sharedPreferences = requireContext().getSharedPreferences("Shered", Context.MODE_PRIVATE)
+                        sharedPreferences.edit().putBoolean("board", true).apply()
                         findNavController().navigate(R.id.action_onBoardFragment_to_noteFragment)
                     }
 
