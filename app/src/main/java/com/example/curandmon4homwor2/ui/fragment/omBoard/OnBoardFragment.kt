@@ -40,7 +40,7 @@ class OnBoardFragment : Fragment() {
     private fun initialize() {
         binding.viewPager2.adapter = OnBoardViewPagerAdapter(this)
 
-        TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position->
+        TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
 
             val customView = LayoutInflater.from(binding.tabLayout.context)
                 .inflate(R.layout.tab_item_icon, binding.tabLayout, false)
@@ -48,7 +48,8 @@ class OnBoardFragment : Fragment() {
             val tabIcon = customView.findViewById<ImageView>(R.id.tab_icon)
             tabIcon.setImageResource(getTabIcon(position)) // метод для получения иконки в зависимости от позиции
 
-            tab.customView = customView        }.attach()
+            tab.customView = customView
+        }.attach()
     }
 
     private fun getTabIcon(position: Int): Int {
@@ -71,25 +72,27 @@ class OnBoardFragment : Fragment() {
                 selectedTab?.customView?.findViewById<ImageView>(R.id.tab_icon)
                     ?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.orange))
 
-
+                val sheredPreference = SheredPreference()
+                sheredPreference.unit(requireContext())
 
                 if (position == 2) {
                     binding.tvStart.visibility = View.VISIBLE
                     binding.tvSkip.visibility = View.INVISIBLE
                 } else {
                     binding.tvStart.visibility = View.INVISIBLE
-                    binding.tvStart.setOnClickListener {
-                        val sharedPreferences = requireContext().getSharedPreferences("Shered", Context.MODE_PRIVATE)
-                        sharedPreferences.edit().putBoolean("board", true).apply()
-                        findNavController().navigate(R.id.action_onBoardFragment_to_noteFragment)
-                    }
 
                     binding.tvSkip.visibility = View.VISIBLE
-                    binding.tvSkip.setOnClickListener {
-                        setCurrentItem(currentItem + 2, true)
 
-                    }
                 }
+                binding.tvSkip.setOnClickListener {
+                    setCurrentItem(currentItem + 2, true)
+
+                }
+                binding.tvStart.setOnClickListener {
+                    sheredPreference.isBoard = true
+                    findNavController().navigate(R.id.action_onBoardFragment_to_noteFragment)
+                }
+
             }
         })
 
@@ -100,7 +103,12 @@ class OnBoardFragment : Fragment() {
         for (i in 0 until binding.tabLayout.tabCount) {
             val tab = binding.tabLayout.getTabAt(i)
             tab?.customView?.findViewById<ImageView>(R.id.tab_icon)
-                ?.setColorFilter(ContextCompat.getColor(requireContext(),R.color.grey))// замените R.color.original_color на ваш исходный цвет
+                ?.setColorFilter(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.grey
+                    )
+                )// замените R.color.original_color на ваш исходный цвет
         }
     }
 

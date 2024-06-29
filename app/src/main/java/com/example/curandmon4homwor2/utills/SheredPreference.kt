@@ -22,4 +22,13 @@ class SheredPreference {
         get() = sheredPreference.getBoolean("board", false)
         set(value) = sheredPreference.edit().putBoolean("board",value).apply()
 
+    var lastLounchTime: Long
+
+        get() = sheredPreference.getLong("lastLounchTime",0L)
+        set(value) = sheredPreference.edit().putLong("lastLounchTime",value).apply()
+
+    fun clear(){
+        sheredPreference.edit().clear().apply()
+    }
+
 }
