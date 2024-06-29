@@ -21,14 +21,24 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val sharedPreferences = getSharedPreferences("Sherde", Context.MODE_PRIVATE)
-        val isOnboardingCompleted = sharedPreferences.getBoolean("board", false)
 
+        val sharedPreferences = SheredPreference()
+        sharedPreferences.unit(this)
+
+        val isOnboardingCompleted = sharedPreferences.isBoard
         val navController = findNavController(R.id.fragment)
+
+        val currentTime = System.currentTimeMillis()
+        val lastLounchTime = sharedPreferences.lastLounchTime
+
+        if (lastLounchTime == 0L || lastLounchTime > currentTime) {
+            sharedPreferences.clear()
+        }
+
         if (isOnboardingCompleted) {
             navController.navigate(R.id.noteFragment)
         } else {
             navController.navigate(R.id.onBoardFragment)
+        }
     }
-}
 }
